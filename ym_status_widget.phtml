@@ -1,0 +1,18 @@
+<p align="<?= $opts['align'] ?>">
+  <?php if ($opts['action'] == 'sendweb' ): ?>
+      <a href="http://edit.yahoo.com/config/send_webmesg?.target=<?= $opts['yahooid'] ?>">
+  <?php else: ?>
+      <a href="ymsgr:<?= $opts['action'] ?>?<?= $opts['yahooid'] ?>">
+  <?php endif ?>
+    <?php if ($opts['image'] == 'custom'): ?>
+        <?php if (YMStatus::IsOnline($opts['yahooid'])): ?>
+            <img src="<?= $opts['custom']['online'] ?>" />
+        <?php else: ?>
+            <img src="<?= $opts['custom']['offline'] ?>" />
+        <?php endif?>
+    <?php else: ?>
+        <img src="http://opi.yahoo.com/online?u=<?= $opts['yahooid'] ?>&m=g&t=<?= $opts['image'] ?>"/>
+    <?php endif ?>      
+  </a>
+</p>
+

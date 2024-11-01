@@ -1,0 +1,59 @@
+<form method="post" action="">
+<h1>Yahoo! Messenger Status Settings</h1>
+
+<h3>Your Yahoo! ID: <input type="text" name="ym_status_settings_yahooid" id="ym_status_settings_yahooid" value="<?= $opts['yahooid'] ?>" /></h3> 
+<p>We need a Yahoo! ID of course to determine your online status.</p>
+
+<h3>Widget Title: <input type="text" name="ym_status_settings_title" id="ym_status_settings_title" value="<?= $opts['title'] ?>" /></h3> 
+<p>The heading displayed before the online status badge on your sidebar.</p>
+
+<h3>Choose your status icon:</h3>
+<p>Select from the list your desired Online/Offline badge. The default Y!M badges available from the webservice are displayed here but if you want your own images displayed, enter the URLs of your online and offline images in the areas provided under 'Custom Image'.</p>
+<table style="width:50%;">
+  <thead>
+    <tr>
+      <th style="width:10%;"></th>
+      <th style="width:45%; text-align:center;">Online</th>
+      <th style="width:45%; text-align:center;">Offline</th>
+    </tr>
+  </thead>
+  <tbody>
+      <?php for($i =0; $i <= 24; $i++) { ?>      
+      <tr>
+        <td style="text-align: center;"><input type="radio" name="ym_status_settings_image" value="<?= $i ?>" title="choice_<?= $i ?>" <?= ($opts['image'] == $i) ? 'checked="checked" ' : ''; ?>/></td>
+        <td style="text-align: center;"><img src="../wp-content/plugins/YmStatusPlugin/status_images/<?= $i ?>_online.gif" /></td>
+        <td style="text-align: center;"><img src="../wp-content/plugins/YmStatusPlugin/status_images/<?= $i ?>_offline.gif" /></td>
+      </tr>
+      <? } ?>
+      <tr>
+        <td></td>
+        <td colspan="2" style="text-align: center;"><h4>Custom Image</h4></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;"> <input type="radio" name="ym_status_settings_image" value="custom" title="choice_custom" <?= ($opts['image'] == 'custom') ? 'checked="checked" ' : '0'; ?>/></td>
+        <td style="text-align: center;">URL of online image:
+          <textarea name="ym_status_settings_custom_online" id="ym_status_settings_custom_online" rows="5"><?= $opts['custom']['online']; ?></textarea></td>
+        <td style="text-align: center;">URL of offline image:<textarea type="textarea" name="ym_status_settings_custom_offline" id="ym_status_settings_custom_offline" rows="5"><?= $opts['custom']['offline']; ?></textarea></td>
+      </tr>      
+  </tbody>
+</table>
+</p>
+
+<h3>Default action:</h3>
+<p>Choose what clicking the badge does.</p>
+<ul>
+    <li><input type="radio" name="ym_status_settings_action" value="sendIM" title="sendIM" <?= ($opts['action'] == 'sendIM') ? 'checked="checked" ' : '0'; ?>/> Sends you a Message <small>Opens a Yahoo Messenger chat window with you as the recipient.</small></li>
+    <li><input type="radio" name="ym_status_settings_action" value="sendweb" title="sendweb" <?= ($opts['action'] == 'sendweb') ? 'checked="checked" ' : '0'; ?>/> Sends you a Web Message <small>Opens Yahoo Web Messenger and starts a chat with you.</small></li>
+    <li><input type="radio" name="ym_status_settings_action" value="addfriend" title="addfriend" <?= ($opts['action'] == 'addfriend') ? 'checked="checked" ' : '0'; ?>/> Adds you as a Contact <small>Adds you as a contact on their Yahoo Messenger contact list.</small></li> 
+    <li><input type="radio" name="ym_status_settings_action" value="call" title="call" <?= ($opts['action'] == 'call') ? 'checked="checked" ' : '0'; ?>/> Calls you <small>Starts a voice call with you on Yahoo Messenger.</small></li>
+</ul>
+
+<h3>Alignment:</h3>
+<p>Choose the alignment of the widget on your sidebar.</p>
+<ul>
+    <li><input type="radio" name="ym_status_settings_align" value="left" title="left" <?= ($opts['align'] == 'left') ? 'checked="checked" ' : '0'; ?>/> Left</li>
+    <li><input type="radio" name="ym_status_settings_align" value="center" title="center" <?= ($opts['align'] == 'center') ? 'checked="checked" ' : '0'; ?>/> Center</li>
+    <li><input type="radio" name="ym_status_settings_align" value="right" title="right" <?= ($opts['align'] == 'right') ? 'checked="checked" ' : '0'; ?>/> Right</li>
+</ul>
+<p class="submit"><input type="submit" name="ym_status_settings_submit" value="<?php _e('Update Options &raquo;','ym_status') ?>" /></p>
+</form>
